@@ -2,6 +2,7 @@ package com.emsi.gowithus.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -12,7 +13,6 @@ import javax.persistence.OneToMany;
 public class Conducteur extends Utilisateur{
 	private String marque;
 	private int nb_places;
-	@OneToMany
-	@JoinColumn(name = "id", referencedColumnName = "id")
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "conducteur")
 	private List<Annonce> annonces;
 }

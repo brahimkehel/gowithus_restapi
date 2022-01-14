@@ -7,7 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
 import com.emsi.gowithus.dao.UtilisateurRepository;
-import com.emsi.gowithus.model.Utilisateur;
+import com.emsi.gowithus.model.Conducteur;
 
 @Transactional
 @Service
@@ -16,13 +16,13 @@ public class UtilisateurServiceImpl implements IUtilisateurService,CommandLineRu
 	private UtilisateurRepository utilisateurRepo;
 	
 	@Override
-	public void saveUser(Utilisateur u) {
-		utilisateurRepo.save(u);
+	public void saveConducteur(Conducteur conducteur) {
+		utilisateurRepo.save(conducteur);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		//saveUser(null);
+		
 	}
 
 }

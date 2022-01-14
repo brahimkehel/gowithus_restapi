@@ -1,8 +1,8 @@
 package com.emsi.gowithus.service;
 
-import com.emsi.gowithus.model.Utilisateur;
+import com.emsi.gowithus.model.Conducteur;
 
 public interface IUtilisateurService {
-	public void saveUser(Utilisateur u);
+	public void saveConducteur(Conducteur conducteur);
 	
 }
