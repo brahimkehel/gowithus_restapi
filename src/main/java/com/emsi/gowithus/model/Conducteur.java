@@ -1,5 +1,7 @@
 package com.emsi.gowithus.model;
 
+import lombok.Data;
+
 import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
@@ -9,7 +11,8 @@ import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("conducteur")
-public class Conducteur extends Utilisateur{
+@Data
+public class Conducteur extends AppUser {
 	private String marque;
 	private int nb_places;
 	@OneToMany
