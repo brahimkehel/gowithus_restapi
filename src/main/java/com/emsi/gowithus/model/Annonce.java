@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,8 +23,9 @@ public class Annonce {
 	private String depart;
 	private String arrive;
 	private float prix;
-	@ManyToOne
-	private Conducteur conducteur;
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@JoinColumn(name = "conducteur_id", nullable = false)
+	private Conducteur conducteur=new Conducteur();
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id", referencedColumnName = "id")
 	private List<Reservation> reservations;

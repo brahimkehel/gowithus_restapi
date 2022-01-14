@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 @Entity
 @DiscriminatorValue("conducteur")
 @Data
-public class Conducteur extends Utilisateur {
+public class Conducteur extends AppUser {
 	private String marque;
 	private int nb_places;
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "conducteur")

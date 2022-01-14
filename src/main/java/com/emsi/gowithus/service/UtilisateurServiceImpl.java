@@ -14,8 +14,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.emsi.gowithus.dao.UtilisateurRepository;
+import com.emsi.gowithus.model.AppUser;
 import com.emsi.gowithus.model.Role;
-import com.emsi.gowithus.model.Utilisateur;
 
 @Transactional
 @Service
@@ -24,13 +24,13 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
     private UtilisateurRepository utilisateurRepo;
 
     @Override
-    public void saveUser(Utilisateur u) {
+    public void saveUser(AppUser u) {
         utilisateurRepo.save(u);
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    	Utilisateur user = utilisateurRepo.findbyUsername(username);
+    	AppUser user = utilisateurRepo.findbyUsername(username);
         if (user == null)
             throw new UsernameNotFoundException("User not found with username: " + username);
         boolean enabled = true;
