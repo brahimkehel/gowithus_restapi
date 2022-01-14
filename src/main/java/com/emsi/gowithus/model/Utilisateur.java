@@ -28,6 +28,7 @@ public class Utilisateur {
 	private String cin;
 	private String nom;
 	private String prenom;
+	private String username;
 	private String email;
 	private String password;
 	private int tel;

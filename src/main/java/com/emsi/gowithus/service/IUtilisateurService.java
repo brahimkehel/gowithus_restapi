@@ -1,8 +1,10 @@
 package com.emsi.gowithus.service;
 
-import com.emsi.gowithus.model.Conducteur;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface IUtilisateurService {
-	public void saveConducteur(Conducteur conducteur);
+import com.emsi.gowithus.model.Utilisateur;
+
+public interface IUtilisateurService extends UserDetailsService {
+	public void saveUser(Utilisateur u);
 	
 }
