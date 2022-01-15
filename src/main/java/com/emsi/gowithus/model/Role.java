@@ -10,11 +10,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data @NoArgsConstructor
 public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
-
+	public Role(String name) {
+		super();
+		this.name = name;
+	}
+	
+	
 }

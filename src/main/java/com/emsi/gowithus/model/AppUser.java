@@ -1,6 +1,8 @@
 package com.emsi.gowithus.model;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 import javax.persistence.*;
@@ -29,6 +31,7 @@ public class AppUser {
 	@NotEmpty(message = "*SVP entrez un USERNAME")
 	private String password;
 	private int tel;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinTable(name = "App_user_role",joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name="role_id"))
 	private List<Role> roles=new ArrayList<Role>();
 }

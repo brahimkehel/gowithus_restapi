@@ -1,5 +1,6 @@
 package com.emsi.gowithus.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,9 +14,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Annonce {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,9 +27,9 @@ public class Annonce {
 	private String depart;
 	private String arrive;
 	private float prix;
-	@ManyToOne(fetch = FetchType.EAGER, optional = false)
-	@JoinColumn(name = "conducteur_id", nullable = false)
-	private Conducteur conducteur=new Conducteur();
+	@ToString.Exclude
+	@ManyToOne
+	private Conducteur conducteur;
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id", referencedColumnName = "id")
 	private List<Reservation> reservations;

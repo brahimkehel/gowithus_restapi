@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.emsi.gowithus.model.AppUser;
 
 public interface UtilisateurRepository extends JpaRepository<AppUser, Integer>{
-	AppUser findbyUsername(String username);
+	AppUser findByUsername(String username);
 }

@@ -1,21 +1,35 @@
 package com.emsi.gowithus.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("conducteur")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Conducteur extends AppUser {
 	private String marque;
 	private int nb_places;
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "conducteur")
-	private List<Annonce> annonces;
+	private List<Annonce> annonces=new ArrayList<>();
+	
+	
+	public void addAnnonce(Annonce a) {
+		this.annonces.add(a);
+		a.setConducteur(this);
+	}
 }
