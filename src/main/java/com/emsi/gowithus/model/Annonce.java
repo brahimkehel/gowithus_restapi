@@ -30,7 +30,11 @@ public class Annonce {
 	@ToString.Exclude
 	@ManyToOne
 	private Conducteur conducteur;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id", referencedColumnName = "id")
-	private List<Reservation> reservations;
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "annonce")
+	private List<Reservation> reservations=new ArrayList<>();
+
+	public void addReservation(Reservation r){
+		this.reservations.add(r);
+		r.setAnnonce(this);
+	}
 }
