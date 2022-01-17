@@ -99,10 +99,11 @@ public class GowithusApplication{
 			a2.setDepart("aaa");
 			a2.setArrive("bbb");
 			a2.setPrix(300);
-			
-			
+			c.addAnnonce(a);
+			c.addAnnonce(a2);
 
 			Reservation r=new Reservation();
+
 
 			c.addAnnonce(a);
 			c.addAnnonce(a2);
@@ -116,16 +117,16 @@ public class GowithusApplication{
 
 			//utilisateurServiceImpl.addRoleToUser("nsisib","Passager");
 
-			a.addReservation(r);
+			/*a.addReservation(r);
 			p.addReservation(r);
-			reservationRepository.save(r);
+			reservationRepository.save(r);*/
 
 			
 			//utilisateurServiceImpl.addRoleToUser("hamiid", "ROLE_Conducteur");c.getAnnonces().get(0).getReservations().get(0).getAnnonce().getConducteur().getRoles()
 
 			log.info("annonce : {}",p.getReservations());
-			
-			
+
+
 		};
 	}
 }

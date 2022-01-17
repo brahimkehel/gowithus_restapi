@@ -2,6 +2,7 @@ package com.emsi.gowithus.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -13,6 +14,8 @@ public class Reservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	private float prix;
+	@JsonIgnoreProperties("reservations")
 	@ToString.Exclude
 	@ManyToOne
 	private Passager passager;

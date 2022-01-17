@@ -6,10 +6,6 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import com.emsi.gowithus.domain.RoleConverter;
-import com.emsi.gowithus.domain.RoleVo;
-import com.emsi.gowithus.domain.UserConverter;
-import com.emsi.gowithus.domain.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,9 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.emsi.gowithus.dao.RoleRepository;
 import com.emsi.gowithus.dao.UtilisateurRepository;
-import com.emsi.gowithus.model.Annonce;
 import com.emsi.gowithus.model.AppUser;
-import com.emsi.gowithus.model.Conducteur;
 import com.emsi.gowithus.model.Role;
 
 @Transactional
@@ -33,8 +27,8 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
     private RoleRepository roleRepo;
 
     @Override
-    public void saveUser(AppUser u) {
-        utilisateurRepo.save(u);
+    public AppUser saveUser(AppUser u) {
+        return utilisateurRepo.save(u);
     }
 
     @Override
@@ -58,8 +52,9 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
     }
 
     @Override
-    public void saveRole(Role role) {
+    public Role saveRole(Role role) {
         roleRepo.save(role);
+        return role;
     }
 
     @Override
