@@ -19,7 +19,7 @@ import org.hibernate.validator.constraints.Length;
 public class AppUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Long id;
 	private String cin;
 	@Length(min = 5, message = "Le nom d'utilisateur doit contenir au moins 5 caractères")
 	@NotEmpty(message = "*SVP entrez un USERNAME")

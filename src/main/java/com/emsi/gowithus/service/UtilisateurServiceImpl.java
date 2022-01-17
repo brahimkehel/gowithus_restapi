@@ -6,6 +6,10 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.emsi.gowithus.domain.RoleConverter;
+import com.emsi.gowithus.domain.RoleVo;
+import com.emsi.gowithus.domain.UserConverter;
+import com.emsi.gowithus.domain.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,7 +39,7 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    	AppUser user = utilisateurRepo.findByUsername(username);
+        AppUser user = utilisateurRepo.findByUsername(username);
         if (user == null)
             throw new UsernameNotFoundException("User not found with username: " + username);
         boolean enabled = true;
@@ -52,18 +56,18 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
         }
         return springSecurityAuthorities;
     }
-    
-    @Override
-	public Role saveRole(Role role) {
-		return roleRepo.save(role);
-	}
 
-	@Override
-	public void addRoleToUser(String username, String roleName) {
-		AppUser user=utilisateurRepo.findByUsername(username);
-		Role role=roleRepo.findByName(roleName);
-		user.getRoles().add(role);
-	}
+    @Override
+    public void saveRole(Role role) {
+        roleRepo.save(role);
+    }
+
+    @Override
+    public void addRoleToUser(String username, String roleName) {
+        AppUser user = utilisateurRepo.findByUsername(username);
+        Role role = roleRepo.findByName(roleName);
+        user.getRoles().add(role);
+    }
 
 
 }
