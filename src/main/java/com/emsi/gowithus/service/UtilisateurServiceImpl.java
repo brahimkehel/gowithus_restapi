@@ -29,8 +29,8 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
     private RoleRepository roleRepo;
 
     @Override
-    public void saveUser(AppUser u) {
-        utilisateurRepo.save(u);
+    public AppUser saveUser(AppUser u) {
+        return utilisateurRepo.save(u);
     }
 
     @Override

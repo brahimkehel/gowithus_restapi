@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -28,9 +30,12 @@ public class Annonce {
 	private String arrive;
 	private float prix;
 	@ToString.Exclude
+	@JsonIgnoreProperties("annonces")
+
 	@ManyToOne
 	private Conducteur conducteur;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id", referencedColumnName = "id")
+
+	@JsonIgnore
+	@OneToMany(cascade = CascadeType.ALL,mappedBy = "annonce")
 	private List<Reservation> reservations;
 }

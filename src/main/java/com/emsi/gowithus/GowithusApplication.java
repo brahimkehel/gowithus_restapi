@@ -74,21 +74,21 @@ public class GowithusApplication{
 			a2.setDepart("aaa");
 			a2.setArrive("bbb");
 			a2.setPrix(300);
-			
-			
 			c.addAnnonce(a);
 			c.addAnnonce(a2);
-			
+			utilisateurServiceImpl.saveUser(c);
+
+			annonceRepository.save(a);annonceRepository.save(a2);
 			
 
-			utilisateurServiceImpl.saveUser(c);
-			annonceRepository.save(a);annonceRepository.save(a2);
+
+
 
 			
 			//utilisateurServiceImpl.addRoleToUser("hamiid", "ROLE_Conducteur");
 			utilisateurServiceImpl.addRoleToUser("hamiid", "ROLE_Passager");
 			
-			log.info("annonce : {}",c.getAnnonces().get(0).getConducteur().getRoles());
+			log.info("annonce : {}",c.getAnnonces());
 			
 			
 		};

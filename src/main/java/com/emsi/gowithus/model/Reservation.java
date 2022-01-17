@@ -1,11 +1,10 @@
 package com.emsi.gowithus.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -14,4 +13,8 @@ public class Reservation {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private float prix;
+	@ToString.Exclude
+	@JsonIgnoreProperties("reservations")
+	@ManyToOne
+	private Annonce annonce;
 }
