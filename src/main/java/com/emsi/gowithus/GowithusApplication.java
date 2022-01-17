@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.emsi.gowithus.dao.ReservationRepository;
+import com.emsi.gowithus.model.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,10 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.emsi.gowithus.dao.AnnonceRepository;
-import com.emsi.gowithus.model.Annonce;
-import com.emsi.gowithus.model.AppUser;
-import com.emsi.gowithus.model.Conducteur;
-import com.emsi.gowithus.model.Role;
 import com.emsi.gowithus.service.UtilisateurServiceImpl;
 
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +31,7 @@ public class GowithusApplication{
 	}
 	
 	@Bean
-	CommandLineRunner run(UtilisateurServiceImpl utilisateurServiceImpl,AnnonceRepository annonceRepository) {
+	CommandLineRunner run(UtilisateurServiceImpl utilisateurServiceImpl, AnnonceRepository annonceRepository, ReservationRepository reservationRepository) {
 		return args->{
 			utilisateurServiceImpl.saveRole(new Role("ROLE_Conducteur"));
 			utilisateurServiceImpl.saveRole(new Role( "ROLE_Passager"));
@@ -63,7 +61,15 @@ public class GowithusApplication{
 			c.setMarque("golf");
 			c.setTel(123456);
 			c.setNb_places(3);
-			
+
+			Passager p=new Passager();
+			p.setCin("d1");
+			p.setNom("abdelilah");
+			p.setPrenom("nssissib");
+			p.setUsername("nsisib");
+			p.setEmail("hamid@gmail.com");
+			p.setPassword("123456");
+			p.setTel(123456);
 			
 			Annonce a=new Annonce();
 			a.setDepart("a");
@@ -76,20 +82,26 @@ public class GowithusApplication{
 			a2.setPrix(300);
 			c.addAnnonce(a);
 			c.addAnnonce(a2);
+
+			Reservation r=new Reservation();
+
+
+			
+
 			utilisateurServiceImpl.saveUser(c);
-
-			annonceRepository.save(a);annonceRepository.save(a2);
-			
-
-
-
-
-			
-			//utilisateurServiceImpl.addRoleToUser("hamiid", "ROLE_Conducteur");
+			utilisateurServiceImpl.saveUser(p);
+			utilisateurServiceImpl.addRoleToUser("nsisib","Passager");
 			utilisateurServiceImpl.addRoleToUser("hamiid", "ROLE_Passager");
+			annonceRepository.save(a);annonceRepository.save(a2);
+			a.addReservation(r);
+			p.addReservation(r);
+			reservationRepository.save(r);
+
 			
-			log.info("annonce : {}",c.getAnnonces());
-			
+			//utilisateurServiceImpl.addRoleToUser("hamiid", "ROLE_Conducteur");c.getAnnonces().get(0).getReservations().get(0).getAnnonce().getConducteur().getRoles()
+
+			log.info("annonce : {}",p.getReservations().get(0).getAnnonce().getConducteur());
+
 			
 		};
 	}

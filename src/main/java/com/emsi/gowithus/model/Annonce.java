@@ -38,4 +38,9 @@ public class Annonce {
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "annonce")
 	private List<Reservation> reservations;
+
+	public void addReservation(Reservation r){
+		this.reservations.add(r);
+		r.setAnnonce(this);
+	}
 }
