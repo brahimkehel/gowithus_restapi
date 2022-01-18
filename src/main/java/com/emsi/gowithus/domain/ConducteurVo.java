@@ -1,6 +1,7 @@
 package com.emsi.gowithus.domain;
 
-
+import com.emsi.gowithus.model.Annonce;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,15 +10,16 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class UserVo {
+public class ConducteurVo {
     private Long id;
     private String cin;
-    private String username;
     private String password;
-    private String email;
+    private int tel;
+    private String username;
     private String nom;
     private String prenom;
-    private int tel;
-    private List<RoleVo> roles = new ArrayList<RoleVo>();
-
+    private String email;
+    private String marque;
+    private int nb_places;
+    private List<AnnonceVo> annonces=new ArrayList<>();
 }

@@ -15,9 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.emsi.gowithus.dao.RoleRepository;
 import com.emsi.gowithus.dao.UtilisateurRepository;
-import com.emsi.gowithus.model.Annonce;
 import com.emsi.gowithus.model.AppUser;
-import com.emsi.gowithus.model.Conducteur;
 import com.emsi.gowithus.model.Role;
 
 @Transactional
@@ -35,7 +33,7 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    	AppUser user = utilisateurRepo.findByUsername(username);
+        AppUser user = utilisateurRepo.findByUsername(username);
         if (user == null)
             throw new UsernameNotFoundException("User not found with username: " + username);
         boolean enabled = true;
@@ -52,18 +50,19 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
         }
         return springSecurityAuthorities;
     }
-    
-    @Override
-	public Role saveRole(Role role) {
-		return roleRepo.save(role);
-	}
 
-	@Override
-	public void addRoleToUser(String username, String roleName) {
-		AppUser user=utilisateurRepo.findByUsername(username);
-		Role role=roleRepo.findByName(roleName);
-		user.getRoles().add(role);
-	}
+    @Override
+    public Role saveRole(Role role) {
+        roleRepo.save(role);
+        return role;
+    }
+
+    @Override
+    public void addRoleToUser(String username, String roleName) {
+        AppUser user = utilisateurRepo.findByUsername(username);
+        Role role = roleRepo.findByName(roleName);
+        user.getRoles().add(role);
+    }
 
 
 }
