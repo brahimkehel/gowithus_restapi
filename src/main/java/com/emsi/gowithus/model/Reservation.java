@@ -14,7 +14,6 @@ public class Reservation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	private float prix;
 	@JsonIgnoreProperties("reservations")
 	@ToString.Exclude
 	@ManyToOne

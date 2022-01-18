@@ -18,6 +18,9 @@ import com.emsi.gowithus.dao.AnnonceRepository;
 import com.emsi.gowithus.service.UtilisateurServiceImpl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 @SpringBootApplication()
 @Slf4j
 public class GowithusApplication{
@@ -25,6 +28,16 @@ public class GowithusApplication{
 	public static void main(String[] args) {
 		SpringApplication.run(GowithusApplication.class, args);
 	}
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+			}
+		};
+	}
+
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 	    return new BCryptPasswordEncoder();

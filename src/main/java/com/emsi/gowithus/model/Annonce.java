@@ -1,5 +1,6 @@
 package com.emsi.gowithus.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class Annonce {
 	private String depart;
 	private String arrive;
 	private float prix;
+	private LocalDate date;
+	private String heureDepart;
 	@ToString.Exclude
 	@JsonIgnoreProperties("annonces")
 
@@ -37,7 +40,7 @@ public class Annonce {
 
 	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "annonce")
-	private List<Reservation> reservations;
+	private List<Reservation> reservations=new ArrayList<>();
 
 	public void addReservation(Reservation r){
 		this.reservations.add(r);
