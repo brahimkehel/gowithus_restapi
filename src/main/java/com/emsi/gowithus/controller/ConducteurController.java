@@ -22,32 +22,21 @@ import lombok.RequiredArgsConstructor;
 public class ConducteurController {
     @Autowired
     private IAnnonceService annonceService;
-    @Autowired
-    private ConducteurRepository conducteurRepository;
 
-    @PostMapping("{id}/saveAnnonce")
-    public ResponseEntity<String> addAnnonce(@PathVariable int id, @RequestBody Annonce annonce) {
+    @PostMapping("{username}/saveAnnonce")
+    public ResponseEntity<String> addAnnonce(@PathVariable String username, @RequestBody Annonce annonce) {
         try {
-            System.out.println(annonce+" " +id);
-            if (id == 0 && !conducteurRepository.findById(id).isPresent()) {
-                return ResponseEntity.notFound().build();
-            }
-            Conducteur c = conducteurRepository.findById(id).get();
-            c.addAnnonce(annonce);
-            annonceService.saveAnnonce(annonce);
+            annonceService.saveAnnonce(username,annonce);
             return ResponseEntity.created(null).build();
         } catch (Exception exception) {
             return ResponseEntity.internalServerError().body(exception.getMessage());
         }
     }
 
-    @GetMapping("{id}/Annonces")
-    public ResponseEntity getAnnoncesByConducteur(@PathVariable int id) {
+    @GetMapping("{username}/Annonces")
+    public ResponseEntity<List<Annonce>> getAnnoncesByConducteur(@PathVariable String username) {
         try {
-            if (id == 0 && !conducteurRepository.findById(id).isPresent()) {
-                return ResponseEntity.notFound().build();
-            }
-            return ResponseEntity.ok(conducteurRepository.getById(id).getAnnonces());
+            return ResponseEntity.ok(annonceService.getAnnoncesByConducteur(username));
         } catch (Exception exception) {
             return ResponseEntity.notFound().build();
         }

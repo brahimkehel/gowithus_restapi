@@ -10,4 +10,5 @@ import java.util.List;
 
 @Repository
 public interface ConducteurRepository extends JpaRepository<Conducteur,Integer> {
+    Conducteur findByUsername(String username);
 }

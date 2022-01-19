@@ -20,7 +20,7 @@ public class AnnonceController {
     private AnnonceRepository annonceRepository;
 
     @GetMapping("")
-    public ResponseEntity<List<Annonce>> getAnnonce(@RequestParam String depart,@RequestParam String arrive){
+    public ResponseEntity<List<Annonce>> getAnnonces(@RequestParam String depart,@RequestParam String arrive){
         if(depart== null || arrive==null){
             return ResponseEntity.badRequest().build();
         }

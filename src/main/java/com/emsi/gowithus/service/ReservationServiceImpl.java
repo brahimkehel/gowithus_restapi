@@ -25,11 +25,11 @@ public class ReservationServiceImpl implements IReservationService{
     private AnnonceRepository annonceRepository;
 
     @Override
-    public void saveReservation(int passager_id,int annonce_id) throws Exception {
-        if (passager_id == 0 || !utilisateurRepository.findById(passager_id).isPresent()) {
+    public void saveReservation(String passager_username,int annonce_id) throws Exception {
+        if (passager_username == "" || utilisateurRepository.findByUsername(passager_username)==null) {
             throw new Exception("Utilisateur not found");
         }
-        Passager p=(Passager) utilisateurRepository.findById(passager_id).get();
+        Passager p=(Passager) utilisateurRepository.findByUsername(passager_username);
         Annonce a=annonceRepository.findById(annonce_id).get();
         Reservation r=new Reservation();
         p.addReservation(r);
@@ -38,10 +38,10 @@ public class ReservationServiceImpl implements IReservationService{
     }
 
     @Override
-    public List<Reservation> getReservationsByPassager(int passager_id) throws Exception {
-        if (passager_id == 0 || !utilisateurRepository.findById(passager_id).isPresent()) {
+    public List<Reservation> getReservationsByPassager(String passager_username) throws Exception {
+        if (passager_username == "" || utilisateurRepository.findByUsername(passager_username)==null) {
             throw new Exception("Utilisateur not found");
         }
-        return ((Passager) utilisateurRepository.findById(passager_id).get()).getReservations();
+        return ((Passager) utilisateurRepository.findByUsername(passager_username)).getReservations();
     }
 }

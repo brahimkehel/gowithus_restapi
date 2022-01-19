@@ -7,7 +7,6 @@ import java.util.List;
 import com.emsi.gowithus.model.Annonce;
 
 public interface IAnnonceService {
-	Annonce saveAnnonce(Annonce annonce);
-	Annonce updateAnnonce(Annonce annonce);
-	void deleteAnnonce(int id);
+	void saveAnnonce(String conducteur_username,Annonce annonce) throws Exception;
+	List<Annonce> getAnnoncesByConducteur(String conducteur_username) throws Exception;
 }	

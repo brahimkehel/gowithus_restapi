@@ -16,20 +16,20 @@ public class PassagerController {
     @Autowired
     private IReservationService reservationService;
 
-    @GetMapping("{passager_id}/Reservations")
-    public ResponseEntity<List<Reservation>> getReservationsByPassager(@PathVariable int passager_id) {
+    @GetMapping("{username}/Reservations")
+    public ResponseEntity<List<Reservation>> getReservationsByPassager(@PathVariable String username) {
         try {
-            reservationService.getReservationsByPassager(passager_id);
+            reservationService.getReservationsByPassager(username);
             return ResponseEntity.ok().build();
         } catch (Exception exception) {
             return ResponseEntity.badRequest().build();
         }
     }
 
-    @PostMapping("{passager_id}/{annonce_id}")
-    public ResponseEntity<String> saveReservation(@PathVariable int passager_id, @PathVariable int annonce_id) {
+    @PostMapping("{username}/{annonce_id}")
+    public ResponseEntity<String> saveReservation(@PathVariable String username, @PathVariable int annonce_id) {
         try {
-            reservationService.saveReservation(passager_id,annonce_id);
+            reservationService.saveReservation(username,annonce_id);
             return ResponseEntity.ok().build();
         } catch (Exception exception) {
             return ResponseEntity.badRequest().build();
