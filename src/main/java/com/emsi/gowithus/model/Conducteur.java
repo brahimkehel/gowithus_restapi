@@ -22,16 +22,15 @@ import javax.persistence.OneToMany;
 @Entity
 @DiscriminatorValue("conducteur")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Conducteur extends AppUser {
 	private String marque;
 	private int nb_places;
 
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "conducteur")
 	private List<Annonce> annonces=new ArrayList<>();
-	
-	
+
 	public void addAnnonce(Annonce a) {
 		this.annonces.add(a);
 		a.setConducteur(this);

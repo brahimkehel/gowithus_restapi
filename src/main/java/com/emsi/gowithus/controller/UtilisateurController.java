@@ -21,6 +21,9 @@ public class UtilisateurController {
 	
 	@PostMapping("/saveConducteur")
 	public ResponseEntity<AppUser> saveConducteur(@RequestBody Conducteur conducteur){
+		System.out.println("=======================================");
+		System.out.println("Conducteur " +conducteur);
+		System.out.println("=======================================");
 		AppUser user=utilisateurService.saveUser(conducteur);
 		utilisateurService.addRoleToUser(conducteur.getUsername(), "ROLE_Conducteur");
 		return ResponseEntity.ok().body(user);
