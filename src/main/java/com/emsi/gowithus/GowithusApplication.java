@@ -56,13 +56,13 @@ public class GowithusApplication{
 			u.setCin("d1");
 			u.setNom("hamada");
 			u.setPrenom("hamiid");
-			u.setUsername("abouuu");
+			u.setUsername("abdslam");
 			u.setEmail("hamid@gmail.com");
 			u.setPassword("123456");
 			u.setTel(123456);
 			utilisateurServiceImpl.saveUser(u);
-			utilisateurServiceImpl.addRoleToUser("abouuu", "ROLE_Passager");
-			utilisateurServiceImpl.addRoleToUser("abouuu", "ROLE_Conducteur");
+			utilisateurServiceImpl.addRoleToUser("abdslam", "ROLE_Passager");
+			utilisateurServiceImpl.addRoleToUser("abdslam", "ROLE_Conducteur");
 
 			//UserDetails ud=utilisateurServiceImpl.loadUserByUsername("abouuu");
 			
@@ -80,8 +80,8 @@ public class GowithusApplication{
 			Passager p=new Passager();
 			p.setCin("d1");
 			p.setNom("abdelilah");
-			p.setPrenom("nssissib");
-			p.setUsername("nsisib");
+			p.setPrenom("hassani");
+			p.setUsername("hassani");
 			p.setEmail("hamid@gmail.com");
 			p.setPassword("123456");
 			p.setTel(123456);
