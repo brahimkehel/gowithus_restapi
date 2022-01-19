@@ -11,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.emsi.gowithus.dao.RoleRepository;
@@ -25,9 +26,12 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
     private UtilisateurRepository utilisateurRepo;
     @Autowired
     private RoleRepository roleRepo;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public AppUser saveUser(AppUser u) {
+        u.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
         return utilisateurRepo.save(u);
     }
 

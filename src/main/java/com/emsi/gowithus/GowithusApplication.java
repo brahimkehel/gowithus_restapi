@@ -58,7 +58,7 @@ public class GowithusApplication{
 			u.setPrenom("hamiid");
 			u.setUsername("abouuu");
 			u.setEmail("hamid@gmail.com");
-			u.setPassword(passwordEncoder().encode("123456"));
+			u.setPassword("123456");
 			u.setTel(123456);
 			utilisateurServiceImpl.saveUser(u);
 			utilisateurServiceImpl.addRoleToUser("abouuu", "ROLE_Passager");
@@ -72,7 +72,7 @@ public class GowithusApplication{
 			c.setPrenom("abo");
 			c.setUsername("hamiid");
 			c.setEmail("hamid@gmail.com");
-			c.setPassword(passwordEncoder().encode("123456"));
+			c.setPassword("123456");
 			c.setMarque("golf");
 			c.setTel(123456);
 			c.setNb_places(3);
@@ -83,7 +83,7 @@ public class GowithusApplication{
 			p.setPrenom("nssissib");
 			p.setUsername("nsisib");
 			p.setEmail("hamid@gmail.com");
-			p.setPassword(passwordEncoder().encode("123456"));
+			p.setPassword("123456");
 			p.setTel(123456);
 			
 			Annonce a=new Annonce();
