@@ -1,8 +1,5 @@
 package com.emsi.gowithus;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import com.emsi.gowithus.dao.ReservationRepository;
 import com.emsi.gowithus.domain.*;
@@ -19,11 +16,9 @@ import com.emsi.gowithus.dao.AnnonceRepository;
 import com.emsi.gowithus.service.UtilisateurServiceImpl;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 
 import javax.transaction.Transactional;
 
@@ -35,10 +30,6 @@ public class GowithusApplication{
 		SpringApplication.run(GowithusApplication.class, args);
 	}
 	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-	    return new BCryptPasswordEncoder();
-	}
-	@Bean
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
@@ -46,6 +37,11 @@ public class GowithusApplication{
 				registry.addMapping("/**").allowedOrigins("http://localhost:4200");
 			}
 		};
+	}
+
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+	    return new BCryptPasswordEncoder();
 	}
 
 	@Bean
@@ -62,7 +58,7 @@ public class GowithusApplication{
 			u.setPrenom("hamiid");
 			u.setUsername("abouuu");
 			u.setEmail("hamid@gmail.com");
-			u.setPassword(passwordEncoder().encode("123456"));
+			u.setPassword("123456");
 			u.setTel(123456);
 			utilisateurServiceImpl.saveUser(u);
 			utilisateurServiceImpl.addRoleToUser("abouuu", "ROLE_Passager");
@@ -76,7 +72,7 @@ public class GowithusApplication{
 			c.setPrenom("abo");
 			c.setUsername("hamiid");
 			c.setEmail("hamid@gmail.com");
-			c.setPassword(passwordEncoder().encode("123456"));
+			c.setPassword("123456");
 			c.setMarque("golf");
 			c.setTel(123456);
 			c.setNb_places(3);
@@ -87,7 +83,7 @@ public class GowithusApplication{
 			p.setPrenom("nssissib");
 			p.setUsername("nsisib");
 			p.setEmail("hamid@gmail.com");
-			p.setPassword(passwordEncoder().encode("123456"));
+			p.setPassword("123456");
 			p.setTel(123456);
 			
 			Annonce a=new Annonce();

@@ -17,7 +17,7 @@ import com.emsi.gowithus.service.IAnnonceService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin
 @RequestMapping("Conducteurs")
 public class ConducteurController {
     @Autowired
@@ -28,13 +28,14 @@ public class ConducteurController {
     @PostMapping("{id}/saveAnnonce")
     public ResponseEntity<String> addAnnonce(@PathVariable int id, @RequestBody Annonce annonce) {
         try {
+            System.out.println(annonce+" " +id);
             if (id == 0 && !conducteurRepository.findById(id).isPresent()) {
                 return ResponseEntity.notFound().build();
             }
             Conducteur c = conducteurRepository.findById(id).get();
             c.addAnnonce(annonce);
             annonceService.saveAnnonce(annonce);
-            return ResponseEntity.created(null).body(c.toString());
+            return ResponseEntity.created(null).build();
         } catch (Exception exception) {
             return ResponseEntity.internalServerError().body(exception.getMessage());
         }
