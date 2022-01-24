@@ -92,8 +92,8 @@ public class GowithusApplication{
 			a.setPrix(200);
 			
 			Annonce a2=new Annonce();
-			a2.setDepart("aaa");
-			a2.setArrive("bbb");
+			a2.setDepart("a");
+			a2.setArrive("b");
 			a2.setPrix(300);
 			c.addAnnonce(a);
 			c.addAnnonce(a2);
