@@ -27,7 +27,7 @@ import javax.persistence.OneToMany;
 public class Conducteur extends AppUser {
 	private String marque;
 	private int nb_places;
-
+	private boolean approuved;
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "conducteur")
 	private List<Annonce> annonces=new ArrayList<>();
 

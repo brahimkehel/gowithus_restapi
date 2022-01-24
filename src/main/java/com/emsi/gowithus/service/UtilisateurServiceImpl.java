@@ -6,6 +6,10 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.emsi.gowithus.dao.ConducteurRepository;
+import com.emsi.gowithus.dao.PassagerRepository;
+import com.emsi.gowithus.model.Conducteur;
+import com.emsi.gowithus.model.Passager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -25,6 +29,10 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
     @Autowired
     private UtilisateurRepository utilisateurRepo;
     @Autowired
+    private PassagerRepository passagerRepository;
+    @Autowired
+    private ConducteurRepository conducteurRepository;
+    @Autowired
     private RoleRepository roleRepo;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -32,7 +40,10 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
     @Override
     public AppUser saveUser(AppUser u) {
         u.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
-        return utilisateurRepo.save(u);
+        utilisateurRepo.save(u);
+        if (u instanceof Passager) addRoleToUser(u.getUsername(), "ROLE_Passager");
+        else if (u instanceof Conducteur) addRoleToUser(u.getUsername(), "ROLE_Conducteur");
+        return u;
     }
 
     @Override
@@ -66,6 +77,13 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
         AppUser user = utilisateurRepo.findByUsername(username);
         Role role = roleRepo.findByName(roleName);
         user.getRoles().add(role);
+    }
+
+    @Override
+    public List<AppUser> getAllApprouved() {
+        List<AppUser> approuvedUsers = conducteurRepository.findByApprouvedTrue();
+        approuvedUsers.addAll(passagerRepository.findAll());
+        return approuvedUsers;
     }
 
 
