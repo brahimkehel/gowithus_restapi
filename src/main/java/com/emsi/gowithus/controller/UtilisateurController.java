@@ -21,6 +21,7 @@ public class UtilisateurController {
     @Autowired
     private IUtilisateurService utilisateurService;
 
+<<<<<<< HEAD
 
     @GetMapping("/approuved")
     public ResponseEntity<List<AppUser>> getAllApprouved() {
@@ -33,6 +34,8 @@ public class UtilisateurController {
         }
     }
 
+=======
+>>>>>>> master
     @PostMapping("/saveConducteur")
     public ResponseEntity<AppUser> saveConducteur(@RequestBody Conducteur conducteur) {
         AppUser user = utilisateurService.saveUser(conducteur);

@@ -87,6 +87,7 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
         user.getRoles().add(role);
     }
 
+<<<<<<< HEAD
     @Override
     public List<AppUser> getAllApprouved() {
         List<AppUser> approuvedUsers = conducteurRepository.findByApprouvedTrue();
@@ -104,4 +105,6 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
     }
 
 
+=======
+>>>>>>> master
 }

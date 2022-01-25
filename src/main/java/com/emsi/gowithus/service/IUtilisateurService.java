@@ -15,6 +15,9 @@ public interface IUtilisateurService extends UserDetailsService {
 	AppUser saveUser(AppUser u);
 	Role saveRole(Role role);
 	void addRoleToUser(String username,String roleName);
+<<<<<<< HEAD
 	List<AppUser> getAllApprouved();
 	void sendMail(List<String> usersEmail,String objet,String content);
+=======
+>>>>>>> master
 }
