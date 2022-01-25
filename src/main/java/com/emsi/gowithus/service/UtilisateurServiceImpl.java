@@ -3,6 +3,7 @@ package com.emsi.gowithus.service;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -11,6 +12,8 @@ import com.emsi.gowithus.dao.PassagerRepository;
 import com.emsi.gowithus.model.Conducteur;
 import com.emsi.gowithus.model.Passager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,6 +29,8 @@ import com.emsi.gowithus.model.Role;
 @Transactional
 @Service
 public class UtilisateurServiceImpl implements IUtilisateurService {
+
+
     @Autowired
     private UtilisateurRepository utilisateurRepo;
     @Autowired
@@ -36,6 +41,8 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
     private RoleRepository roleRepo;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     @Override
     public AppUser saveUser(AppUser u) {
@@ -51,6 +58,7 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
         AppUser user = utilisateurRepo.findByUsername(username);
         if (user == null)
             throw new UsernameNotFoundException("User not found with username: " + username);
+        if (user instanceof Conducteur && !((Conducteur) user).isApprouved()) throw new UsernameNotFoundException("User not Approuved yet : " + username);
         boolean enabled = true;
         boolean accountNonExpired = true;
         boolean credentialsNonExpired = true;
@@ -77,6 +85,27 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
         AppUser user = utilisateurRepo.findByUsername(username);
         Role role = roleRepo.findByName(roleName);
         user.getRoles().add(role);
+    }
+
+    @Override
+    public List<AppUser> getAllApprouved() {
+        List<AppUser> approuvedUsers =conducteurRepository.findByApprouvedIsTrue();
+        approuvedUsers.addAll(passagerRepository.findAll());
+        return approuvedUsers;
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        utilisateurRepo.deleteById(id);
+    }
+
+    @Override
+    public void sendMail(List<String> usersEmail, String objet, String content) {
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(usersEmail.toArray(String[]::new));
+        msg.setSubject(objet);
+        msg.setText(content);
+        javaMailSender.send(msg);
     }
 
 }

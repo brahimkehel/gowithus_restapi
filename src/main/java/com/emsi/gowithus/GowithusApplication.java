@@ -52,7 +52,6 @@ public class GowithusApplication{
 		return args->{
 			utilisateurServiceImpl.saveRole(new Role("ROLE_Conducteur"));
 			utilisateurServiceImpl.saveRole(new Role( "ROLE_Passager"));
-
 			Passager p=new Passager();
 			p.setCin("ad264785");
 			p.setUsername("test@gmail.com");
@@ -61,6 +60,30 @@ public class GowithusApplication{
 			p.setEmail("test@gmail.com");
 			p.setPassword("emsi123");
 			p.setTel(654785);
+			Passager p3=new Passager();
+			p3.setCin("ad264785");
+			p3.setUsername("kehelbrahim@gmail.com");
+			p3.setNom("Kehel");
+			p3.setPrenom("Ibrahim");
+			p3.setEmail("kehelbrahim@gmail.com");
+			p3.setPassword("emsi123");
+			p3.setTel(654785);
+			Passager p4=new Passager();
+			p4.setCin("ad264785");
+			p4.setUsername("mouaddinebasma2@gmail.com");
+			p4.setNom("mouaddine");
+			p4.setPrenom("Basma");
+			p4.setEmail("mouaddinebasma2@gmail.com");
+			p4.setPassword("emsi123");
+			p4.setTel(654785);
+			Passager p5=new Passager();
+			p5.setCin("ad264785");
+			p5.setUsername("tazinouhaila07@gmail.com");
+			p5.setNom("Tazi");
+			p5.setPrenom("Nouhaila");
+			p5.setEmail("tazinouhaila07@gmail.com");
+			p5.setPassword("emsi123");
+			p5.setTel(654785);
 			Passager p1=new Passager();
 			p1.setCin("ad264785");
 			p1.setUsername("froukh@gmail.com");
@@ -98,7 +121,7 @@ public class GowithusApplication{
 			c1.setTel(654785);
 			c1.setMarque("fiat500");
 			c1.setNb_places(2);
-			c1.setApprouved(true);
+			c1.setApprouved(false);
 			Conducteur c2=new Conducteur();
 			c2.setCin("ad264785");
 			c2.setUsername("harrami@gmail.com");
@@ -110,15 +133,15 @@ public class GowithusApplication{
 			c2.setMarque("peugeot 208");
 			c2.setNb_places(4);
 			c2.setApprouved(true);
-
 			utilisateurServiceImpl.saveUser(p);
 			utilisateurServiceImpl.saveUser(p1);
 			utilisateurServiceImpl.saveUser(p2);
+			utilisateurServiceImpl.saveUser(p3);
+			utilisateurServiceImpl.saveUser(p4);
+			utilisateurServiceImpl.saveUser(p5);
 			utilisateurServiceImpl.saveUser(c);
 			utilisateurServiceImpl.saveUser(c1);
 			utilisateurServiceImpl.saveUser(c2);
-
-
 		};
 	}
 }
