@@ -13,4 +13,5 @@ import java.util.List;
 public interface ConducteurRepository extends JpaRepository<Conducteur,Integer> {
     Conducteur findByUsername(String username);
     List<AppUser> findByApprouvedTrue();
+
 }

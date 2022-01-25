@@ -12,10 +12,9 @@ import java.util.List;
 
 
 public interface IUtilisateurService extends UserDetailsService {
-
 	AppUser saveUser(AppUser u);
 	Role saveRole(Role role);
 	void addRoleToUser(String username,String roleName);
 	List<AppUser> getAllApprouved();
-
+	void sendMail(List<String> usersEmail,String objet,String content);
 }
