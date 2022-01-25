@@ -7,4 +7,5 @@ import java.util.List;
 public interface IConducteurService {
     List<Conducteur> getAllAprrouved();
     List<Conducteur> getAllNonApprouved();
+    Conducteur setApprouvedUser(int id);
 }

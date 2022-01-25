@@ -26,4 +26,12 @@ public class ConducteurServiceImpl implements IConducteurService{
         List<Conducteur> approuvedUsers = conducteurRepository.findByApprouvedFalse();
         return approuvedUsers;
     }
+
+    @Override
+    public Conducteur setApprouvedUser(int id) {
+        Conducteur conducteur=conducteurRepository.findById(id).get();
+        conducteur.setApprouved(true);
+        conducteurRepository.save(conducteur);
+        return conducteur;
+    }
 }

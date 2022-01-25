@@ -10,13 +10,12 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ConducteurRepository extends JpaRepository<Conducteur,Integer> {
+public interface ConducteurRepository extends JpaRepository<Conducteur, Integer> {
     Conducteur findByUsername(String username);
-<<<<<<< HEAD
-    List<AppUser> findByApprouvedTrue();
 
-=======
+    List<AppUser> findByApprouvedIsTrue();
+
     List<Conducteur> findByApprouvedTrue();
+
     List<Conducteur> findByApprouvedFalse();
->>>>>>> master
 }

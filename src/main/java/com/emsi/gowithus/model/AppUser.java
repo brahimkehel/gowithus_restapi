@@ -40,7 +40,7 @@ public class AppUser {
 	private String password;
 	private int tel;
 	private LocalDate joiningDate= LocalDate.now();
-	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "App_user_role",joinColumns = @JoinColumn(name = "user_id"),inverseJoinColumns = @JoinColumn(name="role_id"))
 	private List<Role> roles=new ArrayList<Role>();
 }

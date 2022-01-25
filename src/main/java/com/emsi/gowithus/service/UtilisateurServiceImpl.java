@@ -87,12 +87,16 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
         user.getRoles().add(role);
     }
 
-<<<<<<< HEAD
     @Override
     public List<AppUser> getAllApprouved() {
-        List<AppUser> approuvedUsers = conducteurRepository.findByApprouvedTrue();
+        List<AppUser> approuvedUsers =conducteurRepository.findByApprouvedIsTrue();
         approuvedUsers.addAll(passagerRepository.findAll());
         return approuvedUsers;
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+        utilisateurRepo.deleteById(id);
     }
 
     @Override
@@ -104,7 +108,4 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
         javaMailSender.send(msg);
     }
 
-
-=======
->>>>>>> master
 }

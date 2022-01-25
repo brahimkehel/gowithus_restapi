@@ -52,10 +52,6 @@ public class GowithusApplication{
 		return args->{
 			utilisateurServiceImpl.saveRole(new Role("ROLE_Conducteur"));
 			utilisateurServiceImpl.saveRole(new Role( "ROLE_Passager"));
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 			Passager p=new Passager();
 			p.setCin("ad264785");
 			p.setUsername("test@gmail.com");
@@ -137,10 +133,6 @@ public class GowithusApplication{
 			c2.setMarque("peugeot 208");
 			c2.setNb_places(4);
 			c2.setApprouved(true);
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 			utilisateurServiceImpl.saveUser(p);
 			utilisateurServiceImpl.saveUser(p1);
 			utilisateurServiceImpl.saveUser(p2);
