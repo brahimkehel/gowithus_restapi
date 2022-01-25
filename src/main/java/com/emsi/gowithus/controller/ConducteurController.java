@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.emsi.gowithus.dao.ConducteurRepository;
 import com.emsi.gowithus.model.Conducteur;
+import com.emsi.gowithus.service.IConducteurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,8 @@ import lombok.RequiredArgsConstructor;
 public class ConducteurController {
     @Autowired
     private IAnnonceService annonceService;
+    @Autowired
+    private IConducteurService conducteurService;
 
     @PostMapping("{username}/saveAnnonce")
     public ResponseEntity<String> addAnnonce(@PathVariable String username, @RequestBody Annonce annonce) {
@@ -42,4 +45,21 @@ public class ConducteurController {
         }
     }
 
+    @GetMapping("/approuved")
+    public ResponseEntity<List<Conducteur>> getAllAprrouved(){
+        try{
+            return ResponseEntity.ok(conducteurService.getAllAprrouved());
+        }catch(Exception exception){
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/nonapprouved")
+    public ResponseEntity<List<Conducteur>> getAllNonApprouved(){
+        try{
+            return ResponseEntity.ok(conducteurService.getAllNonApprouved());
+        }catch(Exception exception){
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }

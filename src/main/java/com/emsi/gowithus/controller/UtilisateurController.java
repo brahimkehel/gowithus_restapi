@@ -20,17 +20,6 @@ public class UtilisateurController {
     @Autowired
     private IUtilisateurService utilisateurService;
 
-    @GetMapping("/approuved")
-    public ResponseEntity<List<AppUser>> getAllApprouved() {
-        try{
-            List<AppUser> approuvedUsers = utilisateurService.getAllApprouved();
-            return ResponseEntity.ok().body(approuvedUsers);
-
-        }catch (Exception e){
-            return ResponseEntity.badRequest().build();
-        }
-    }
-
     @PostMapping("/saveConducteur")
     public ResponseEntity<AppUser> saveConducteur(@RequestBody Conducteur conducteur) {
         AppUser user = utilisateurService.saveUser(conducteur);

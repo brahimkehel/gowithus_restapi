@@ -52,7 +52,7 @@ public class GowithusApplication{
 		return args->{
 			utilisateurServiceImpl.saveRole(new Role("ROLE_Conducteur"));
 			utilisateurServiceImpl.saveRole(new Role( "ROLE_Passager"));
-<<<<<<< HEAD
+
 			Passager p=new Passager();
 			p.setCin("ad264785");
 			p.setUsername("test@gmail.com");
@@ -110,63 +110,7 @@ public class GowithusApplication{
 			c2.setMarque("peugeot 208");
 			c2.setNb_places(4);
 			c2.setApprouved(true);
-=======
-			
-			AppUser u=new AppUser();
-			u.setId(0L);
-			u.setCin("d1");
-			u.setNom("hamada");
-			u.setPrenom("hamiid");
-			u.setUsername("abdslam");
-			u.setEmail("hamid@gmail.com");
-			u.setPassword("123456");
-			u.setTel(123456);
-			utilisateurServiceImpl.saveUser(u);
-			utilisateurServiceImpl.addRoleToUser("abdslam", "ROLE_Passager");
-			utilisateurServiceImpl.addRoleToUser("abdslam", "ROLE_Conducteur");
 
-			//UserDetails ud=utilisateurServiceImpl.loadUserByUsername("abouuu");
-			
-			Conducteur c=new Conducteur();
-			c.setCin("d1");
-			c.setNom("hamada");
-			c.setPrenom("abo");
-			c.setUsername("hamiid");
-			c.setEmail("hamid@gmail.com");
-			c.setPassword("123456");
-			c.setMarque("golf");
-			c.setTel(123456);
-			c.setNb_places(3);
-
-			Passager p=new Passager();
-			p.setCin("d1");
-			p.setNom("abdelilah");
-			p.setPrenom("hassani");
-			p.setUsername("hassani");
-			p.setEmail("hamid@gmail.com");
-			p.setPassword("123456");
-			p.setTel(123456);
-			
-			Annonce a=new Annonce();
-			a.setDepart("a");
-			a.setArrive("b");
-			a.setPrix(200);
-			
-			Annonce a2=new Annonce();
-			a2.setDepart("a");
-			a2.setArrive("b");
-			a2.setPrix(300);
-			c.addAnnonce(a);
-			c.addAnnonce(a2);
-
-			Reservation r=new Reservation();
-
-
-			c.addAnnonce(a);
-			c.addAnnonce(a2);
-
-			utilisateurServiceImpl.saveUser(c);
->>>>>>> 3bb7ec83df9462d901f6bfe6fdcee36941777bf2
 			utilisateurServiceImpl.saveUser(p);
 			utilisateurServiceImpl.saveUser(p1);
 			utilisateurServiceImpl.saveUser(p2);

@@ -79,12 +79,4 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
         user.getRoles().add(role);
     }
 
-    @Override
-    public List<AppUser> getAllApprouved() {
-        List<AppUser> approuvedUsers = conducteurRepository.findByApprouvedTrue();
-        approuvedUsers.addAll(passagerRepository.findAll());
-        return approuvedUsers;
-    }
-
-
 }

@@ -1,6 +1,8 @@
 package com.emsi.gowithus.controller;
 
+import com.emsi.gowithus.model.Passager;
 import com.emsi.gowithus.model.Reservation;
+import com.emsi.gowithus.service.IPassagerService;
 import com.emsi.gowithus.service.IReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,8 @@ import java.util.stream.Collectors;
 public class PassagerController {
     @Autowired
     private IReservationService reservationService;
+    @Autowired
+    private IPassagerService passagerService;
 
     @GetMapping("{username}/Reservations")
     public ResponseEntity<List<Reservation>> getReservationsByPassager(@PathVariable String username) {
@@ -32,6 +36,15 @@ public class PassagerController {
             reservationService.saveReservation(username,annonce_id);
             return ResponseEntity.ok().build();
         } catch (Exception exception) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<Passager>> getAll(){
+        try{
+            return ResponseEntity.ok().body(passagerService.getAll());
+        }catch(Exception exception){
             return ResponseEntity.badRequest().build();
         }
     }
