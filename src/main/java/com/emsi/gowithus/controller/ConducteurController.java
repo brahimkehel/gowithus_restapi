@@ -63,12 +63,12 @@ public class ConducteurController {
         }
     }
     @PostMapping("/{id}")
-    public ResponseEntity<String> setApprouvedConducteur(@PathVariable int id){
+        public ResponseEntity<String> setApprouvedConducteur(@PathVariable String id){
         try{
-             conducteurService.setApprouvedUser(id);
-             return ResponseEntity.ok("modifie avec success");
+             conducteurService.setApprouvedUser(Long.parseLong(id));
+             return ResponseEntity.ok().build();
         }catch (Exception e){
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 }

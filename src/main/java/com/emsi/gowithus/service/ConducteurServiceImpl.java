@@ -28,8 +28,9 @@ public class ConducteurServiceImpl implements IConducteurService{
     }
 
     @Override
-    public Conducteur setApprouvedUser(int id) {
+    public Conducteur setApprouvedUser(Long id) {
         Conducteur conducteur=conducteurRepository.findById(id).get();
+        System.out.println(conducteur);
         conducteur.setApprouved(true);
         conducteurRepository.save(conducteur);
         return conducteur;

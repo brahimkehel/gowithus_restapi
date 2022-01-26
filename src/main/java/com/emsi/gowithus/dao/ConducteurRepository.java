@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ConducteurRepository extends JpaRepository<Conducteur, Integer> {
+public interface ConducteurRepository extends JpaRepository<Conducteur, Long> {
     Conducteur findByUsername(String username);
 
     List<AppUser> findByApprouvedIsTrue();

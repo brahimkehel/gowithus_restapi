@@ -51,7 +51,7 @@ public class UtilisateurController {
             utilisateurService.sendMail((List<String>) email.get("emails"), (String) email.get("objet"), (String) email.get("content"));
             return ResponseEntity.ok().build();
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Les informations  semblent incorrectes");
+            return ResponseEntity.badRequest().body("Les informations  semblent incorrectes :"+e.getMessage());
         }
     }
 
@@ -59,7 +59,7 @@ public class UtilisateurController {
     public ResponseEntity<String> delete(@PathVariable Long id){
         try{
             utilisateurService.deleteUser(id);
-            return ResponseEntity.ok("Suppression avec succès");
+            return ResponseEntity.ok().build();
         }catch(Exception e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
