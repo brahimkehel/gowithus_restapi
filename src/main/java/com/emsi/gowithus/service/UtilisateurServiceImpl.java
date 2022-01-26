@@ -25,6 +25,7 @@ import com.emsi.gowithus.dao.RoleRepository;
 import com.emsi.gowithus.dao.UtilisateurRepository;
 import com.emsi.gowithus.model.AppUser;
 import com.emsi.gowithus.model.Role;
+import org.springframework.web.multipart.MultipartFile;
 
 @Transactional
 @Service

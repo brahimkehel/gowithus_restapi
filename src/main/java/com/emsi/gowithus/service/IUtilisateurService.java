@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import com.emsi.gowithus.model.Annonce;
 import com.emsi.gowithus.model.AppUser;
 import com.emsi.gowithus.model.Role;
-
+import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 
