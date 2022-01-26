@@ -46,7 +46,7 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
     private JavaMailSender javaMailSender;
 
     @Override
-    public AppUser saveUser(AppUser u, MultipartFile photo) {
+    public AppUser saveUser(AppUser u) {
         u.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
         utilisateurRepo.save(u);
         if (u instanceof Passager) addRoleToUser(u.getUsername(), "ROLE_Passager");
