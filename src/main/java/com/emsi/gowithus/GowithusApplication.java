@@ -60,13 +60,15 @@ public class GowithusApplication{
 			p.setEmail("test@gmail.com");
 			p.setPassword("emsi123");
 			p.setTel(654785);
-			Passager p3=new Passager();
+			Conducteur p3=new Conducteur();
 			p3.setCin("ad264785");
 			p3.setUsername("kehelbrahim@gmail.com");
 			p3.setNom("Kehel");
 			p3.setPrenom("Ibrahim");
 			p3.setEmail("kehelbrahim@gmail.com");
 			p3.setPassword("emsi123");
+			p3.setMarque("GOLF");
+			p3.setNb_places(5);
 			p3.setTel(654785);
 			Passager p4=new Passager();
 			p4.setCin("ad264785");
