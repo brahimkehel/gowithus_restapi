@@ -25,6 +25,7 @@ import com.emsi.gowithus.dao.RoleRepository;
 import com.emsi.gowithus.dao.UtilisateurRepository;
 import com.emsi.gowithus.model.AppUser;
 import com.emsi.gowithus.model.Role;
+import org.springframework.web.multipart.MultipartFile;
 
 @Transactional
 @Service
@@ -45,7 +46,7 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
     private JavaMailSender javaMailSender;
 
     @Override
-    public AppUser saveUser(AppUser u) {
+    public AppUser saveUser(AppUser u, MultipartFile photo) {
         u.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
         utilisateurRepo.save(u);
         if (u instanceof Passager) addRoleToUser(u.getUsername(), "ROLE_Passager");
