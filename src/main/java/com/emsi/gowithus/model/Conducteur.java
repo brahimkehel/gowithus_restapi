@@ -1,19 +1,12 @@
 package com.emsi.gowithus.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("conducteur")
@@ -24,6 +17,7 @@ public class Conducteur extends AppUser {
 	private String marque;
 	private int nb_places;
 	private boolean approuved;
+	private String carteGrise;
 	@OneToMany(cascade = CascadeType.ALL,mappedBy = "conducteur")
 	private List<Annonce> annonces=new ArrayList<>();
 

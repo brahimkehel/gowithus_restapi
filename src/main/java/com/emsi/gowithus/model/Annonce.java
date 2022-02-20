@@ -32,9 +32,9 @@ public class Annonce {
 	private float prix;
 	private LocalDate date;
 	private String heureDepart;
+
 	@ToString.Exclude
 	@JsonIgnoreProperties("annonces")
-
 	@ManyToOne
 	private Conducteur conducteur;
 

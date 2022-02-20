@@ -31,7 +31,6 @@ public class ConducteurServiceImpl implements IConducteurService {
     }
 
     @Override
-
     public Conducteur setApprouvedUser(Long id) {
         SimpleMailMessage msg = new SimpleMailMessage();
         Conducteur conducteur = conducteurRepository.findById(id).get();
@@ -39,7 +38,7 @@ public class ConducteurServiceImpl implements IConducteurService {
         conducteurRepository.save(conducteur);
         msg.setTo(conducteur.getEmail());
         msg.setSubject("Félicitation vous êtes approuvés");
-        msg.setText("Bonjour Mme/Mr " + conducteur.getNom() + " " + conducteur.getPrenom() + "\n Vous êtes maintenant approuvés, vous pouvez maintenant se connecter à votre compte.\n Merci\n L'équipe GOWITHUS");
+        msg.setText("Bonjour " + conducteur.getNom() + " " + conducteur.getPrenom() + "\n Vous êtes maintenant approuvés, vous pouvez maintenant se connecter à votre compte.\n Merci\n L'équipe GOWITHUS");
         javaMailSender.send(msg);
         return conducteur;
     }

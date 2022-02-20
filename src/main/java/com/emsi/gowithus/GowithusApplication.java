@@ -1,28 +1,22 @@
 package com.emsi.gowithus;
 
 
-import com.emsi.gowithus.dao.PassagerRepository;
+import com.emsi.gowithus.dao.AnnonceRepository;
 import com.emsi.gowithus.dao.ReservationRepository;
-import com.emsi.gowithus.domain.*;
-import com.emsi.gowithus.model.*;
+import com.emsi.gowithus.model.Conducteur;
+import com.emsi.gowithus.model.Passager;
+import com.emsi.gowithus.model.Role;
+import com.emsi.gowithus.service.UtilisateurServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
-import com.emsi.gowithus.dao.AnnonceRepository;
-import com.emsi.gowithus.service.UtilisateurServiceImpl;
-
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 
 @SpringBootApplication()
 @Slf4j
@@ -45,6 +39,7 @@ public class GowithusApplication{
 	public BCryptPasswordEncoder passwordEncoder() {
 	    return new BCryptPasswordEncoder();
 	}
+
 
 	@Bean
 	@Transactional
@@ -135,15 +130,15 @@ public class GowithusApplication{
 			c2.setMarque("peugeot 208");
 			c2.setNb_places(4);
 			c2.setApprouved(false);
-			utilisateurServiceImpl.saveUser(p);
-			utilisateurServiceImpl.saveUser(p1);
-			utilisateurServiceImpl.saveUser(p2);
-			utilisateurServiceImpl.saveUser(p3);
-			utilisateurServiceImpl.saveUser(p4);
-			utilisateurServiceImpl.saveUser(p5);
-			utilisateurServiceImpl.saveUser(c);
-			utilisateurServiceImpl.saveUser(c1);
-			utilisateurServiceImpl.saveUser(c2);
+			utilisateurServiceImpl.saveUser(p,null,null,null);
+			utilisateurServiceImpl.saveUser(p1,null,null,null);
+			utilisateurServiceImpl.saveUser(p2,null,null,null);
+			utilisateurServiceImpl.saveUser(p3,null,null,null);
+			utilisateurServiceImpl.saveUser(p4,null,null,null);
+			utilisateurServiceImpl.saveUser(p5,null,null,null);
+			utilisateurServiceImpl.saveUser(c,null,null,null);
+			utilisateurServiceImpl.saveUser(c1,null,null,null);
+			utilisateurServiceImpl.saveUser(c2,null,null,null);
 		};
 	}
 }

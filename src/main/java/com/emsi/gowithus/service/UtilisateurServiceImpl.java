@@ -1,16 +1,16 @@
 package com.emsi.gowithus.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.transaction.Transactional;
-
 import com.emsi.gowithus.dao.ConducteurRepository;
 import com.emsi.gowithus.dao.PassagerRepository;
+import com.emsi.gowithus.dao.RoleRepository;
+import com.emsi.gowithus.dao.UtilisateurRepository;
+import com.emsi.gowithus.model.AppUser;
 import com.emsi.gowithus.model.Conducteur;
 import com.emsi.gowithus.model.Passager;
+import com.emsi.gowithus.model.Role;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -20,18 +20,21 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import com.emsi.gowithus.dao.RoleRepository;
-import com.emsi.gowithus.dao.UtilisateurRepository;
-import com.emsi.gowithus.model.AppUser;
-import com.emsi.gowithus.model.Role;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.ServletContext;
+import javax.transaction.Transactional;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Transactional
 @Service
 public class UtilisateurServiceImpl implements IUtilisateurService {
-
-
+    @Autowired
+    private ServletContext context;
     @Autowired
     private UtilisateurRepository utilisateurRepo;
     @Autowired
@@ -44,9 +47,29 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     @Autowired
     private JavaMailSender javaMailSender;
+    private static final String DIRECTORY = System.getProperty("user.dir") + "/src/main/resources/images";
 
     @Override
-    public AppUser saveUser(AppUser u) {
+    public AppUser saveUser(AppUser u, MultipartFile photoProfil, MultipartFile photoCin, MultipartFile photoCarteGrise) throws IOException {
+
+        if (photoProfil != null && photoCin != null) {
+            boolean isExist = new File(DIRECTORY + u.getUsername()).exists();
+            if (!isExist) new File("images/" + u.getUsername()).mkdir();
+            String newFilenamePicPro = "photoProfile_" + u.getUsername() + "." + FilenameUtils.getExtension(photoProfil.getOriginalFilename());
+            String newFilenamePicCin = "photoCin_" + u.getUsername() + "." + FilenameUtils.getExtension(photoCin.getOriginalFilename());
+            File serverFileProfil = new File(DIRECTORY + u.getUsername() + "/" + File.separator + newFilenamePicPro);
+            File serverFileCin = new File(DIRECTORY + u.getUsername() + "/" + File.separator + newFilenamePicCin);
+            FileUtils.writeByteArrayToFile(serverFileProfil, photoProfil.getBytes());
+            FileUtils.writeByteArrayToFile(serverFileCin, photoCin.getBytes());
+            u.setPhotoCin(newFilenamePicCin);
+            u.setPhotoProfile(newFilenamePicPro);
+            if(photoCarteGrise!=null){
+                String newFilenamePicCarteG = "photoCarteGrise_" + u.getUsername() + "." + FilenameUtils.getExtension(photoCarteGrise.getOriginalFilename());
+                File serverFileCarte = new File(DIRECTORY + u.getUsername() + "/" + File.separator + newFilenamePicCarteG);
+                FileUtils.writeByteArrayToFile(serverFileCarte, photoCarteGrise.getBytes());
+                ((Conducteur) u).setCarteGrise(newFilenamePicCarteG);
+            }
+        }
         u.setPassword(bCryptPasswordEncoder.encode(u.getPassword()));
         utilisateurRepo.save(u);
         if (u instanceof Passager) addRoleToUser(u.getUsername(), "ROLE_Passager");
@@ -59,7 +82,8 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
         AppUser user = utilisateurRepo.findByUsername(username);
         if (user == null)
             throw new UsernameNotFoundException("User not found with username: " + username);
-        if (user instanceof Conducteur && !((Conducteur) user).isApprouved()) throw new UsernameNotFoundException("User not Approuved yet : " + username);
+        if (user instanceof Conducteur && !((Conducteur) user).isApprouved())
+            throw new UsernameNotFoundException("User not Approuved yet : " + username);
         boolean enabled = true;
         boolean accountNonExpired = true;
         boolean credentialsNonExpired = true;
@@ -90,7 +114,7 @@ public class UtilisateurServiceImpl implements IUtilisateurService {
 
     @Override
     public List<AppUser> getAllApprouved() {
-        List<AppUser> approuvedUsers =conducteurRepository.findByApprouvedIsTrue();
+        List<AppUser> approuvedUsers = conducteurRepository.findByApprouvedIsTrue();
         approuvedUsers.addAll(passagerRepository.findAll());
         return approuvedUsers;
     }
