@@ -50,8 +50,10 @@ public class GowithusApplication{
 	@Transactional
 	CommandLineRunner run(UtilisateurServiceImpl utilisateurServiceImpl, AnnonceRepository annonceRepository, ReservationRepository reservationRepository) {
 		return args->{
-			utilisateurServiceImpl.saveRole(new Role("ROLE_Conducteur"));
+			/*utilisateurServiceImpl.saveRole(new Role("ROLE_Conducteur"));
 			utilisateurServiceImpl.saveRole(new Role( "ROLE_Passager"));
+			utilisateurServiceImpl.saveRole(new Role( "ROLE_Admin"));
+
 			Passager p=new Passager();
 			p.setCin("ad264785");
 			p.setUsername("test@gmail.com");
@@ -123,7 +125,7 @@ public class GowithusApplication{
 			c1.setTel(654785);
 			c1.setMarque("fiat500");
 			c1.setNb_places(2);
-			c1.setApprouved(false);
+			c1.setApprouved(true);
 			Conducteur c2=new Conducteur();
 			c2.setCin("ad264785");
 			c2.setUsername("harrami@gmail.com");
@@ -135,6 +137,18 @@ public class GowithusApplication{
 			c2.setMarque("peugeot 208");
 			c2.setNb_places(4);
 			c2.setApprouved(false);
+
+			AppUser admin=new AppUser();
+			admin.setCin("ad264785");
+			admin.setUsername("admin@gmail.com");
+			admin.setNom("hamali");
+			admin.setPrenom("Hamid");
+			admin.setEmail("admin@gmail.com");
+			admin.setPassword("emsi123");
+			admin.setTel(654785);
+			utilisateurServiceImpl.saveUser(admin);
+			utilisateurServiceImpl.addRoleToUser("admin@gmail.com","ROLE_Admin");
+
 			utilisateurServiceImpl.saveUser(p);
 			utilisateurServiceImpl.saveUser(p1);
 			utilisateurServiceImpl.saveUser(p2);
@@ -143,7 +157,7 @@ public class GowithusApplication{
 			utilisateurServiceImpl.saveUser(p5);
 			utilisateurServiceImpl.saveUser(c);
 			utilisateurServiceImpl.saveUser(c1);
-			utilisateurServiceImpl.saveUser(c2);
+			utilisateurServiceImpl.saveUser(c2);*/
 		};
 	}
 }
