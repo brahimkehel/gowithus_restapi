@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -38,10 +39,10 @@ public class ReservationServiceImpl implements IReservationService{
     }
 
     @Override
-    public List<Reservation> getReservationsByPassager(String passager_username) throws Exception {
+    public List getReservationsByPassager(String passager_username) throws Exception {
         if (passager_username == "" || utilisateurRepository.findByUsername(passager_username)==null) {
             throw new Exception("Utilisateur not found");
         }
-        return ((Passager) utilisateurRepository.findByUsername(passager_username)).getReservations();
+        return ((Passager) utilisateurRepository.findByUsername(passager_username)).getReservations().stream().map(r->r.getAnnonce()).collect(Collectors.toList());
     }
 }

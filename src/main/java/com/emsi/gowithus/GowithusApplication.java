@@ -3,6 +3,7 @@ package com.emsi.gowithus;
 
 import com.emsi.gowithus.dao.AnnonceRepository;
 import com.emsi.gowithus.dao.ReservationRepository;
+import com.emsi.gowithus.model.AppUser;
 import com.emsi.gowithus.model.Conducteur;
 import com.emsi.gowithus.model.Passager;
 import com.emsi.gowithus.model.Role;
@@ -47,6 +48,8 @@ public class GowithusApplication{
 		return args->{
 			utilisateurServiceImpl.saveRole(new Role("ROLE_Conducteur"));
 			utilisateurServiceImpl.saveRole(new Role( "ROLE_Passager"));
+			utilisateurServiceImpl.saveRole(new Role( "ROLE_Admin"));
+
 			Passager p=new Passager();
 			p.setCin("ad264785");
 			p.setUsername("test@gmail.com");
@@ -118,7 +121,7 @@ public class GowithusApplication{
 			c1.setTel(654785);
 			c1.setMarque("fiat500");
 			c1.setNb_places(2);
-			c1.setApprouved(false);
+			c1.setApprouved(true);
 			Conducteur c2=new Conducteur();
 			c2.setCin("ad264785");
 			c2.setUsername("harrami@gmail.com");
@@ -130,6 +133,18 @@ public class GowithusApplication{
 			c2.setMarque("peugeot 208");
 			c2.setNb_places(4);
 			c2.setApprouved(false);
+
+			AppUser admin=new AppUser();
+			admin.setCin("ad264785");
+			admin.setUsername("admin@gmail.com");
+			admin.setNom("hamali");
+			admin.setPrenom("Hamid");
+			admin.setEmail("admin@gmail.com");
+			admin.setPassword("emsi123");
+			admin.setTel(654785);
+			utilisateurServiceImpl.saveUser(admin,null,null,null);
+			utilisateurServiceImpl.addRoleToUser("admin@gmail.com","ROLE_Admin");
+
 			utilisateurServiceImpl.saveUser(p,null,null,null);
 			utilisateurServiceImpl.saveUser(p1,null,null,null);
 			utilisateurServiceImpl.saveUser(p2,null,null,null);
