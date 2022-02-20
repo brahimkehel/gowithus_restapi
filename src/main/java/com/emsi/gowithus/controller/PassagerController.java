@@ -23,8 +23,7 @@ public class PassagerController {
     @GetMapping("{username}/Reservations")
     public ResponseEntity<List<Reservation>> getReservationsByPassager(@PathVariable String username) {
         try {
-            reservationService.getReservationsByPassager(username);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok(reservationService.getReservationsByPassager(username));
         } catch (Exception exception) {
             return ResponseEntity.badRequest().build();
         }

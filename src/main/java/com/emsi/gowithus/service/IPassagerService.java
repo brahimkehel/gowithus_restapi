@@ -1,6 +1,7 @@
 package com.emsi.gowithus.service;
 
 import com.emsi.gowithus.model.Passager;
+import com.emsi.gowithus.model.Reservation;
 
 import java.util.List;
 
